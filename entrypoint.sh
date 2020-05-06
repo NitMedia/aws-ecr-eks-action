@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-export AWS_HOME=${{ runner.temp }}/.aws
-export AWS_CONFIG_FILE=${{ runner.temp }}/.aws/config
-export AWS_SHARED_CREDENTIALS_FILE=${{ runner.temp }}/.aws/credentials
-export AWS_REGION=${{ secrets.AWS_REGION }}
+export AWS_HOME=$GITHUB_WORKSPACE/.aws
+export AWS_CONFIG_FILE=$GITHUB_WORKSPACE/.aws/config
+export AWS_SHARED_CREDENTIALS_FILE=$GITHUB_WORKSPACE/.aws/credentials
+export AWS_REGION=$AWS_REGION
 
 # Set the PATH to include our binaries
 mkdir -p "${HOME}/.local/bin"
@@ -16,8 +16,8 @@ echo "::set-env name=AWS_CONFIG_FILE,::${AWS_CONFIG_FILE}"
 echo "::set-env name=AWS_SHARED_CREDENTIALS_FILE,::${AWS_SHARED_CREDENTIALS_FILE}"
 aws configure set default.region $AWS_REGION
 aws configure set default.output json
-aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 # Validate AWS credentials
 aws sts get-caller-identity
 #Build, tag, and push image to Amazon ECR
@@ -41,4 +41,4 @@ mv ./kustomize "${HOME}/.local/bin"
 # Setup Kube Config
 mkdir -p "${RUNNER_TEMP}/.kube"
 echo "::set-env name=KUBECONFIG,::${KUBECONFIG}"
-echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > "${KUBECONFIG}"
+echo "${KUBE_CONFIG_DATA}" | base64 --decode > "${KUBECONFIG}"
