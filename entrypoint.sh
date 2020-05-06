@@ -4,7 +4,6 @@ set -e
 export AWS_HOME=$RUNNER_TEMP/.aws
 export AWS_CONFIG_FILE=$RUNNER_TEMP/.aws/config
 export AWS_SHARED_CREDENTIALS_FILE=$RUNNER_TEMP/.aws/credentials
-export AWS_REGION=$AWS_REGION
 
 # Set the PATH to include our binaries
 mkdir -p "${HOME}/.local/bin"

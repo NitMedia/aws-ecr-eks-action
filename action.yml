@@ -5,6 +5,15 @@ branding:
   icon: 'cloud'  
   color: 'red'
 inputs:
+    AWS_REGION:
+      description: The ecr registry
+      required: true
+    AWS_ACCESS_KEY_ID:
+      description: The ecr registry
+      required: true
+    AWS_SECRET_ACCESS_KEY:
+      description: The ecr registry
+      required: true
     ECR_REGISTRY: 
       description: The ecr registry
       required: true
@@ -22,4 +31,8 @@ runs:
   args:
     - ${{ inputs.ECR_REGISTRY }}
     - ${{ inputs.ECR_REPOSITORY }}
+    - ${{ inputs.AWS_REGION }}
+    - ${{ inputs.AWS_ACCESS_KEY_ID }}
     - ${{ inputs.IMAGE_TAG }}
+    - ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+    
