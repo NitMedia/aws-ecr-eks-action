@@ -31,7 +31,7 @@ aws sts get-caller-identity
 #Build, tag, and push image to Amazon ECR
 # Login to AWS ECR
 $( aws ecr get-login --region $AWS_REGION --no-include-email )
-docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg GITHUB_TOKEN=$GITHUB_TOKEN
 docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 #Setup Kube Context
 export KUBECONFIG=$RUNNER_TEMP/.kube/config
