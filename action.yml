@@ -20,4 +20,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ runner.temp }}
+    - ${{ inputs.ECR_REGISTRY }}
+    - ${{ inputs.ECR_REPOSITORY }}
+    - ${{ inputs.IMAGE_TAG }}
