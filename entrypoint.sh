@@ -30,7 +30,7 @@ aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 aws sts get-caller-identity
 #Build, tag, and push image to Amazon ECR
 # Login to AWS ECR
-$( aws ecr get-login --region $AWS_REGION --no-include-email )
+$( aws ecr get-login-password --region $AWS_REGION )
 docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 #Setup Kube Context
