@@ -1,0 +1,25 @@
+# NitMedia
+
+This is a github action to help with building aws ecr images and deploying to a eks cluster
+
+## Secrets needed to setup
+
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+
+## How to use the action
+
+    - name: Setup AWS
+      uses: NitMedia/aws-ecr-eks-action@master
+      with:
+        ECR_REGISTRY: ***.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REPOSITORY: test-repo
+        IMAGE_TAG: ${{ github.sha }}
+
+    - name: Deploy Dev
+      if: github.ref != 'refs/heads/master'
+      run: |
+       # Apply configuration to cluster
+       export KUBECONFIG="${RUNNER_TEMP}/.kube/config"
+       # then use kubectl
