@@ -1,4 +1,11 @@
-FROM amazon/aws-cli:latest
+FROM docker:19.03.4
+
+RUN apk update \
+  && apk upgrade \
+  && apk add --no-cache --update python py-pip coreutils bash \
+  && rm -rf /var/cache/apk/* \
+  && pip install awscli \
+  && apk --purge -v del py-pip
 
 LABEL "com.github.actions.name"="aws-ecr-eks-action"
 LABEL "com.github.actions.description"="logs into aws, build and pushes to ecr, allows to run kubectl"
