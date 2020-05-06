@@ -16,15 +16,8 @@ inputs:
       description: what to build as the image
       required: false
       default: true
-    RUNNER_TEMP:
-      description: what to build as the image
-      required: false
-      default: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.ECR_REGISTRY }}
-    - ${{ inputs.ECR_REPOSITORY }}
-    - ${{ inputs.IMAGE_TAG }}
-    - ${{ inputs.RUNNER_TEMP }}
+    - ${{ runner.temp }}

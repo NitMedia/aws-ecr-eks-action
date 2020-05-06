@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM amazon/aws-cli:latest
 
 LABEL "com.github.actions.name"="aws-ecr-eks-action"
 LABEL "com.github.actions.description"="logs into aws, build and pushes to ecr, allows to run kubectl"
