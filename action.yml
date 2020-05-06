@@ -1,0 +1,25 @@
+name: AWS ECR EKS
+author: Nithin Meppurathu <nithin@nitmedia.com>
+description: logs into aws, build and pushes to ecr, allows to run kubectl
+branding:
+  icon: 'cloud'  
+  color: 'red'
+inputs:
+    ECR_REGISTRY: 
+      description: The ecr registry
+      required: true
+    ECR_REPOSITORY:
+      description: the erc repo name
+      required: false
+      default: true
+    IMAGE_TAG:
+      description: what to build as the image
+      required: false
+      default: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.ECR_REGISTRY }}
+    - ${{ inputs.ECR_REPOSITORY }}
+    - ${{ inputs.IMAGE_TAG }}
