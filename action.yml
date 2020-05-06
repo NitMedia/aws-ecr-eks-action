@@ -6,13 +6,13 @@ branding:
   color: 'red'
 inputs:
     AWS_REGION:
-      description: The ecr registry
+      description: The aws region
       required: true
     AWS_ACCESS_KEY_ID:
-      description: The ecr registry
+      description: The aws access id
       required: true
     AWS_SECRET_ACCESS_KEY:
-      description: The ecr registry
+      description: The aws secret key
       required: true
     ECR_REGISTRY: 
       description: The ecr registry
@@ -25,14 +25,20 @@ inputs:
       description: what to build as the image
       required: false
       default: true
+    KUBE_CONFIG:
+      description: your kube config base64
+      required: false
+      default: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.ECR_REGISTRY }}
-    - ${{ inputs.ECR_REPOSITORY }}
     - ${{ inputs.AWS_REGION }}
     - ${{ inputs.AWS_ACCESS_KEY_ID }}
-    - ${{ inputs.IMAGE_TAG }}
     - ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+    - ${{ inputs.ECR_REGISTRY }}
+    - ${{ inputs.ECR_REPOSITORY }}
+    - ${{ inputs.IMAGE_TAG }}
+    - ${{ inputs.KUBE_CONFIG }}
+    
     
